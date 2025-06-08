@@ -1,0 +1,143 @@
+{% extends "base.html" %} {% block title %}Agricultural Analytics Platform -
+Data{% endblock %} {% block content %}
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold text-success">Dataset Overview</h1>
+      <p class="lead">Browse through the agricultural dataset</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Agricultural Dataset</h5>
+          <p>
+            This dataset contains information about different farms, their crop
+            types, soil types, irrigation methods, and yields. The data is used
+            to train our machine learning models and generate insights.
+          </p>
+          <div class="table-responsive">{{ data | safe }}</div>
+          <p class="text-muted small mt-3">
+            Note: Only the first 50 rows are displayed. The complete dataset
+            contains more entries.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Dataset Information</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-3 text-success">
+                Column Descriptions
+              </h6>
+              <dl class="row">
+                <dt class="col-sm-6">Farm_ID</dt>
+                <dd class="col-sm-6">Unique identifier for each farm</dd>
+
+                <dt class="col-sm-6">Crop_Type</dt>
+                <dd class="col-sm-6">
+                  Type of crop grown (e.g., Rice, Wheat, Maize)
+                </dd>
+
+                <dt class="col-sm-6">Farm_Area(acres)</dt>
+                <dd class="col-sm-6">Size of the farm in acres</dd>
+
+                <dt class="col-sm-6">Irrigation_Type</dt>
+                <dd class="col-sm-6">Method of irrigation used</dd>
+
+                <dt class="col-sm-6">Fertilizer_Used(tons)</dt>
+                <dd class="col-sm-6">Amount of fertilizer used in tons</dd>
+
+                <dt class="col-sm-6">Pesticide_Used(kg)</dt>
+                <dd class="col-sm-6">Amount of pesticide used in kilograms</dd>
+
+                <dt class="col-sm-6">Yield(tons)</dt>
+                <dd class="col-sm-6">Crop yield in tons (target variable)</dd>
+
+                <dt class="col-sm-6">Soil_Type</dt>
+                <dd class="col-sm-6">Type of soil in the farm</dd>
+
+                <dt class="col-sm-6">Season</dt>
+                <dd class="col-sm-6">
+                  Growing season (e.g., Rabi, Kharif, Zaid)
+                </dd>
+
+                <dt class="col-sm-6">Water_Usage(cubic meters)</dt>
+                <dd class="col-sm-6">Amount of water used for irrigation</dd>
+              </dl>
+            </div>
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-3 text-success">
+                Seasons Explanation
+              </h6>
+              <dl class="row">
+                <dt class="col-sm-4">Monsoon (Kharif)</dt>
+                <dd class="col-sm-8">
+                  Crops sown in the rainy season (July-October)
+                </dd>
+
+                <dt class="col-sm-4">Winter (Rabi)</dt>
+                <dd class="col-sm-8">
+                  Crops sown in winter season (October-March)
+                </dd>
+
+                <dt class="col-sm-4">Summer (Zaid)</dt>
+                <dd class="col-sm-8">
+                  Crops grown during the short summer season
+                </dd>
+              </dl>
+
+              <h6 class="card-subtitle mb-3 mt-4 text-success">
+                Soil Types Overview
+              </h6>
+              <dl class="row">
+                <dt class="col-sm-4">Loamy</dt>
+                <dd class="col-sm-8">
+                  Balanced mix of sand, silt and clay - generally fertile
+                </dd>
+
+                <dt class="col-sm-4">Sandy</dt>
+                <dd class="col-sm-8">
+                  Quick-draining soil with poor nutrient retention
+                </dd>
+
+                <dt class="col-sm-4">Clay</dt>
+                <dd class="col-sm-8">
+                  Heavy, dense soil with good nutrient retention but poor
+                  drainage
+                </dd>
+
+                <dt class="col-sm-4">Silty</dt>
+                <dd class="col-sm-8">
+                  Smooth soil with good water retention and nutrients
+                </dd>
+
+                <dt class="col-sm-4">Peaty</dt>
+                <dd class="col-sm-8">
+                  High organic content soil, typically acidic
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4 mb-5">
+    <div class="col text-center">
+      <a href="{{ url_for('visualize') }}" class="btn btn-success btn-lg">
+        <i class="fas fa-chart-bar me-2"></i>Explore Visualizations
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

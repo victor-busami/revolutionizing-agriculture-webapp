@@ -1,0 +1,319 @@
+{% extends "base.html" %} {% block title %}Agricultural Analytics Platform -
+Dashboard{% endblock %} {% block content %}
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold text-success">Analytics Dashboard</h1>
+      <p class="lead">Key insights from your agricultural data</p>
+    </div>
+  </div>
+
+  <!-- Key Metrics Section -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-3">
+      <div class="card bg-success text-white h-100">
+        <div class="card-body">
+          <h5 class="card-title">Model Accuracy</h5>
+          <p class="display-6">{{ model_r2 * 100 }}%</p>
+          <p class="small">R-squared score</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-primary text-white h-100">
+        <div class="card-body">
+          <h5 class="card-title">Model Error</h5>
+          <p class="display-6">{{ model_rmse }}</p>
+          <p class="small">RMSE (tons)</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-info text-white h-100">
+        <div class="card-body">
+          <h5 class="card-title">Total Crop Types</h5>
+          <p class="display-6">{{ crop_counts|length }}</p>
+          <p class="small">Unique varieties</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card bg-warning text-white h-100">
+        <div class="card-body">
+          <h5 class="card-title">Seasons Covered</h5>
+          <p class="display-6">{{ season_counts|length }}</p>
+          <p class="small">Growing seasons</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col">
+      <h2 class="h4 fw-bold">Distribution Analysis</h2>
+    </div>
+  </div>
+
+  <!-- Distribution Charts -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Crop Type Distribution</h5>
+          <div class="chart-container">
+            <canvas id="cropDistributionChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Soil Type Distribution</h5>
+          <div class="chart-container">
+            <canvas id="soilDistributionChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Season Distribution</h5>
+          <div class="chart-container">
+            <canvas id="seasonDistributionChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Feature Importance</h5>
+          <div class="chart-container">
+            <img
+              src="data:image/png;base64,{{ feature_importance_plot }}"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Crop Performance Table -->
+  <div class="row mb-4">
+    <div class="col">
+      <h2 class="h4 fw-bold">Crop Performance Metrics</h2>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Crop Type</th>
+                  <th>Average Yield (tons)</th>
+                  <th>Average Fertilizer (tons)</th>
+                  <th>Average Pesticide (kg)</th>
+                  <th>Average Water Usage (cubic meters)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for crop in crop_metrics %}
+                <tr>
+                  <td>{{ crop.Crop_Type }}</td>
+                  <td>{{ crop['Yield(tons)'] }}</td>
+                  <td>{{ crop['Fertilizer_Used(tons)'] }}</td>
+                  <td>{{ crop['Pesticide_Used(kg)'] }}</td>
+                  <td>{{ crop['Water_Usage(cubic meters)'] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="h4 fw-bold mb-0">Model Information</h2>
+        <a href="{{ url_for('retrain') }}" class="btn btn-outline-success">
+          <i class="fas fa-sync-alt me-2"></i>Retrain Model
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Model Performance</h5>
+          <div class="mt-3">
+            <div class="d-flex justify-content-between mb-2">
+              <span>R-squared Score:</span>
+              <span class="fw-bold">{{ model_r2 }}</span>
+            </div>
+            <div class="progress mb-3" style="height: 10px">
+              <div
+                class="progress-bar bg-success"
+                role="progressbar"
+                style="width: {{ model_r2 * 100 }}%"
+              ></div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2">
+              <span>RMSE:</span>
+              <span class="fw-bold">{{ model_rmse }} tons</span>
+            </div>
+            <p class="small text-muted mt-3">
+              The Random Forest Regressor model has been trained on historical
+              agricultural data to predict crop yields based on various factors
+              such as soil type, irrigation method, fertilizer usage, and more.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Usage Instructions</h5>
+          <div class="mt-3">
+            <ol>
+              <li class="mb-2">
+                View the
+                <a href="{{ url_for('data_view') }}">complete dataset</a> to
+                understand the data structure
+              </li>
+              <li class="mb-2">
+                Explore
+                <a href="{{ url_for('visualize') }}">visualizations</a> to gain
+                insights into patterns and relationships
+              </li>
+              <li class="mb-2">
+                Use the
+                <a href="{{ url_for('predict') }}">prediction tool</a> to
+                forecast crop yields based on your parameters
+              </li>
+              <li class="mb-2">
+                Retrain the model if new data becomes available
+              </li>
+            </ol>
+            <p class="small text-muted mt-3">
+              The model automatically updates when new data is added to the
+              system, ensuring predictions remain accurate and relevant.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Crop distribution chart
+      const cropCtx = document.getElementById('cropDistributionChart').getContext('2d');
+      const cropData = {
+          labels: [{% for crop, count in crop_counts.items() %}'{{ crop }}', {% endfor %}],
+          datasets: [{
+              data: [{% for crop, count in crop_counts.items() %}{{ count }}, {% endfor %}],
+              backgroundColor: [
+                  'rgba(75, 192, 192, 0.7)',
+                  'rgba(153, 102, 255, 0.7)',
+                  'rgba(255, 205, 86, 0.7)',
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(255, 99, 132, 0.7)',
+                  'rgba(201, 203, 207, 0.7)',
+                  'rgba(255, 159, 64, 0.7)',
+                  'rgba(120, 180, 120, 0.7)',
+                  'rgba(180, 120, 180, 0.7)',
+                  'rgba(90, 120, 200, 0.7)'
+              ],
+              borderWidth: 1
+          }]
+      };
+      new Chart(cropCtx, {
+          type: 'pie',
+          data: cropData,
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'bottom'
+                  }
+              }
+          }
+      });
+
+      // Soil distribution chart
+      const soilCtx = document.getElementById('soilDistributionChart').getContext('2d');
+      const soilData = {
+          labels: [{% for soil, count in soil_counts.items() %}'{{ soil }}', {% endfor %}],
+          datasets: [{
+              data: [{% for soil, count in soil_counts.items() %}{{ count }}, {% endfor %}],
+              backgroundColor: [
+                  'rgba(153, 102, 255, 0.7)',
+                  'rgba(75, 192, 192, 0.7)',
+                  'rgba(255, 99, 132, 0.7)',
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(255, 159, 64, 0.7)'
+              ],
+              borderWidth: 1
+          }]
+      };
+      new Chart(soilCtx, {
+          type: 'pie',
+          data: soilData,
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'bottom'
+                  }
+              }
+          }
+      });
+
+      // Season distribution chart
+      const seasonCtx = document.getElementById('seasonDistributionChart').getContext('2d');
+      const seasonData = {
+          labels: [{% for season, count in season_counts.items() %}'{{ season }}', {% endfor %}],
+          datasets: [{
+              data: [{% for season, count in season_counts.items() %}{{ count }}, {% endfor %}],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.7)',
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(255, 205, 86, 0.7)'
+              ],
+              borderWidth: 1
+          }]
+      };
+      new Chart(seasonCtx, {
+          type: 'pie',
+          data: seasonData,
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'bottom'
+                  }
+              }
+          }
+      });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends "base.html" %} {% block title %}Agricultural Analytics Platform -
+Visualizations{% endblock %} {% block content %}
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold text-success">Data Visualizations</h1>
+      <p class="lead">Interactive charts to explore agricultural patterns</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-lg-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Select Visualization</h5>
+          <div class="list-group mt-3">
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="crop_distribution"
+            >
+              Crop Type Distribution
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="season_distribution"
+            >
+              Season Distribution
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="yield_by_crop"
+            >
+              Yield by Crop Type
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="yield_by_soil_type"
+            >
+              Yield by Soil Type
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="yield_by_season"
+            >
+              Yield by Season
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="yield_by_irrigation"
+            >
+              Yield by Irrigation Type
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              data-plot="correlation"
+            >
+              Correlation Matrix
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title" id="plotTitle">
+            Select a visualization from the menu
+          </h5>
+          <div id="plotDescription" class="text-muted small mb-3">
+            Click on a visualization type from the left panel to load the chart
+            here.
+          </div>
+          <div id="plotContainer" style="height: 500px">
+            <div class="d-flex justify-content-center align-items-center h-100">
+              <div class="text-center text-muted">
+                <i class="fas fa-chart-line fa-3x mb-3"></i>
+                <p>Select a visualization to begin</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">About These Visualizations</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-3 text-success">
+                Distribution Charts
+              </h6>
+              <p>
+                These charts help you understand how farms, crops, and resources
+                are distributed across different categories.
+              </p>
+              <ul>
+                <li>
+                  <strong>Crop Type Distribution</strong> - Shows the number of
+                  farms growing each crop type
+                </li>
+                <li>
+                  <strong>Season Distribution</strong> - Shows how crop
+                  cultivation is distributed across seasons
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-3 text-success">
+                Yield Analysis Charts
+              </h6>
+              <p>
+                These charts help identify which factors contribute to higher
+                yields.
+              </p>
+              <ul>
+                <li>
+                  <strong>Yield by Crop Type</strong> - Compare average yields
+                  between different crops
+                </li>
+                <li>
+                  <strong>Yield by Soil Type</strong> - See which soil types
+                  produce higher yields
+                </li>
+                <li>
+                  <strong>Yield by Season</strong> - Analyze seasonal effects on
+                  crop productivity
+                </li>
+                <li>
+                  <strong>Yield by Irrigation Type</strong> - Compare irrigation
+                  method effectiveness
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h6 class="card-subtitle mb-3 text-success">Correlation Matrix</h6>
+            <p>
+              This heatmap shows the relationships between different numerical
+              variables in the dataset. Strong positive correlations are shown
+              in darker blue, while negative correlations appear in red.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const plotContainer = document.getElementById("plotContainer");
+    const plotTitle = document.getElementById("plotTitle");
+    const plotDescription = document.getElementById("plotDescription");
+    const plotButtons = document.querySelectorAll("[data-plot]");
+
+    const descriptions = {
+      crop_distribution:
+        "This pie chart shows the distribution of different crop types in the dataset.",
+      season_distribution:
+        "This pie chart shows how crop cultivation is distributed across different growing seasons.",
+      yield_by_crop:
+        "This bar chart compares the average yield for each crop type.",
+      yield_by_soil_type:
+        "This bar chart shows how soil type affects average crop yields.",
+      yield_by_season:
+        "This bar chart illustrates the average crop yields across different growing seasons.",
+      yield_by_irrigation:
+        "This bar chart compares the effectiveness of different irrigation methods on crop yields.",
+      correlation:
+        "This heatmap shows the correlation between numerical variables in the dataset.",
+    };
+
+    const titles = {
+      crop_distribution: "Crop Type Distribution",
+      season_distribution: "Season Distribution",
+      yield_by_crop: "Average Yield by Crop Type",
+      yield_by_soil_type: "Average Yield by Soil Type",
+      yield_by_season: "Average Yield by Season",
+      yield_by_irrigation: "Average Yield by Irrigation Type",
+      correlation: "Correlation Matrix",
+    };
+
+    // Add click event to each plot button
+    plotButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const plotType = this.getAttribute("data-plot");
+
+        // Update active state
+        plotButtons.forEach((btn) => btn.classList.remove("active"));
+        this.classList.add("active");
+
+        // Update title and description
+        plotTitle.textContent = titles[plotType];
+        plotDescription.textContent = descriptions[plotType];
+
+        // Show loading indicator
+        plotContainer.innerHTML = `
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <div class="text-center">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Loading visualization...</p>
+                        </div>
+                    </div>`;
+
+        // Fetch plot data
+        fetch(`/api/plot/${plotType}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Clear loading indicator
+            plotContainer.innerHTML = "";
+
+            // Parse the Plotly figure
+            const figure = JSON.parse(data.plot);
+
+            // Create the plot
+            Plotly.newPlot(plotContainer, figure.data, figure.layout);
+          })
+          .catch((error) => {
+            console.error("Error fetching plot:", error);
+            plotContainer.innerHTML = `
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <div class="text-center text-danger">
+                                    <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                                    <p>Error loading visualization. Please try again.</p>
+                                </div>
+                            </div>`;
+          });
+      });
+    });
+
+    // Select the first plot by default
+    if (plotButtons.length > 0) {
+      plotButtons[0].click();
+    }
+  });
+</script>
+{% endblock %}

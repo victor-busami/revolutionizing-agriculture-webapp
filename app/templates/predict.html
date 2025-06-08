@@ -1,0 +1,237 @@
+{% extends "base.html" %} {% block title %}Agricultural Analytics Platform -
+Predict Yield{% endblock %} {% block content %}
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="display-5 fw-bold text-success">Crop Yield Prediction</h1>
+      <p class="lead">Use our machine learning model to predict crop yields</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Enter Farm Parameters</h5>
+          <form action="{{ url_for('predict') }}" method="POST" class="mt-4">
+            <div class="row g-3">
+              <!-- Crop Type Selection -->
+              <div class="col-md-6">
+                <label for="crop_type" class="form-label">Crop Type</label>
+                <select
+                  class="form-select"
+                  id="crop_type"
+                  name="crop_type"
+                  required
+                >
+                  <option value="" selected disabled>Select crop type</option>
+                  {% for crop in crop_types %}
+                  <option value="{{ crop }}">{{ crop }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Soil Type Selection -->
+              <div class="col-md-6">
+                <label for="soil_type" class="form-label">Soil Type</label>
+                <select
+                  class="form-select"
+                  id="soil_type"
+                  name="soil_type"
+                  required
+                >
+                  <option value="" selected disabled>Select soil type</option>
+                  {% for soil in soil_types %}
+                  <option value="{{ soil }}">{{ soil }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Irrigation Type Selection -->
+              <div class="col-md-6">
+                <label for="irrigation_type" class="form-label"
+                  >Irrigation Type</label
+                >
+                <select
+                  class="form-select"
+                  id="irrigation_type"
+                  name="irrigation_type"
+                  required
+                >
+                  <option value="" selected disabled>
+                    Select irrigation type
+                  </option>
+                  {% for irrigation in irrigation_types %}
+                  <option value="{{ irrigation }}">{{ irrigation }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Season Selection -->
+              <div class="col-md-6">
+                <label for="season" class="form-label">Growing Season</label>
+                <select class="form-select" id="season" name="season" required>
+                  <option value="" selected disabled>Select season</option>
+                  {% for season in seasons %}
+                  <option value="{{ season }}">{{ season }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Farm Area -->
+              <div class="col-md-6">
+                <label for="farm_area" class="form-label"
+                  >Farm Area (acres)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="farm_area"
+                  name="farm_area"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <!-- Fertilizer Used -->
+              <div class="col-md-6">
+                <label for="fertilizer_used" class="form-label"
+                  >Fertilizer Used (tons)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="fertilizer_used"
+                  name="fertilizer_used"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <!-- Pesticide Used -->
+              <div class="col-md-6">
+                <label for="pesticide_used" class="form-label"
+                  >Pesticide Used (kg)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pesticide_used"
+                  name="pesticide_used"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <!-- Water Usage -->
+              <div class="col-md-6">
+                <label for="water_usage" class="form-label"
+                  >Water Usage (cubic meters)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="water_usage"
+                  name="water_usage"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn btn-success btn-lg">
+                  <i class="fas fa-calculator me-2"></i>Predict Yield
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      {% if prediction %}
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <h5 class="card-title">Prediction Result</h5>
+          <div class="mt-4 mb-4">
+            <div class="display-1 text-success fw-bold">{{ prediction }}</div>
+            <p class="lead">tons expected yield</p>
+          </div>
+          <p class="text-muted small">
+            Based on the parameters provided, our machine learning model
+            predicts this yield amount. Actual results may vary due to external
+            factors like weather conditions.
+          </p>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">About the Prediction Model</h5>
+          <div class="mt-3">
+            <p>
+              Our yield prediction model uses Random Forest Regression, trained
+              on historical agricultural data. The model considers multiple
+              factors including:
+            </p>
+            <ul>
+              <li>Crop type and growing season</li>
+              <li>Soil type and irrigation method</li>
+              <li>
+                Farm size and input quantities (fertilizer, pesticide, water)
+              </li>
+            </ul>
+            <div class="alert alert-success mt-3">
+              <i class="fas fa-info-circle me-2"></i>
+              The model's accuracy may vary based on region-specific factors not
+              included in the dataset.
+            </div>
+            <div class="mt-4">
+              <h6 class="text-success">Recommended Ranges</h6>
+              <div class="table-responsive">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th>Parameter</th>
+                      <th>Min</th>
+                      <th>Max</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Farm Area (acres)</td>
+                      <td>5</td>
+                      <td>500</td>
+                    </tr>
+                    <tr>
+                      <td>Fertilizer (tons)</td>
+                      <td>0.5</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td>Pesticide (kg)</td>
+                      <td>0.5</td>
+                      <td>5</td>
+                    </tr>
+                    <tr>
+                      <td>Water (cubic meters)</td>
+                      <td>5000</td>
+                      <td>100000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

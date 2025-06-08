@@ -14,16 +14,16 @@ Clink the link to get our pitch deck link:
 
 ## 📂 Project Structure
 
-* `agric_analysis_training.ipynb`: The main notebook containing all analysis steps including:
+- `agric_analysis_training.ipynb`: The main notebook containing all analysis steps including:
 
-  * Data Loading: Uses `agriculture_dataset.csv` (should be in the same directory) with crop yield, season, and input data.
-  * Exploratory Data Analysis (EDA): Visualizations (histograms, boxplots, scatter plots) to understand variable distributions and detect outliers.
-  * Data Preprocessing: Handles missing values, applies scaling, and encodes categorical variables.
-  * Modeling: Trains both Linear Regression and Random Forest Regressor models.
-  * Model Evaluation: Uses metrics such as RMSE and R² score to evaluate performance.
-  * Insights: Summarizes findings including feature importance and seasonal impacts.
+  - Data Loading: Uses `agriculture_dataset.csv` (should be in the same directory) with crop yield, season, and input data.
+  - Exploratory Data Analysis (EDA): Visualizations (histograms, boxplots, scatter plots) to understand variable distributions and detect outliers.
+  - Data Preprocessing: Handles missing values, applies scaling, and encodes categorical variables.
+  - Modeling: Trains both Linear Regression and Random Forest Regressor models.
+  - Model Evaluation: Uses metrics such as RMSE and R² score to evaluate performance.
+  - Insights: Summarizes findings including feature importance and seasonal impacts.
 
-* `agriculture_dataset.csv`: The dataset containing agricultural yield data (not included—please provide your own dataset).
+- `agriculture_dataset.csv`: The dataset containing agricultural yield data (not included—please provide your own dataset).
 
 ---
 
@@ -40,11 +40,11 @@ cd agriculture-analytics-platform
 
 The project requires Python 3.x and the following libraries:
 
-* pandas
-* numpy
-* matplotlib
-* seaborn
-* scikit-learn
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
 
 To install all dependencies:
 
@@ -67,25 +67,26 @@ pip install pandas numpy matplotlib seaborn scikit-learn
    ```bash
    jupyter notebook
    ```
+
 2. Open `agric_analysis_training.ipynb`.
 3. Run each cell sequentially:
 
-   * Load the dataset.
-   * Perform EDA to understand data distributions and patterns.
-   * Preprocess the data (handle missing values, encoding, scaling).
-   * Train and evaluate models.
-   * Review the results including RMSE and R² scores.
+   - Load the dataset.
+   - Perform EDA to understand data distributions and patterns.
+   - Preprocess the data (handle missing values, encoding, scaling).
+   - Train and evaluate models.
+   - Review the results including RMSE and R² scores.
 
 ---
 
 ## 🔍 Key Features and Functionality
 
-* **Data Exploration:** Understand seasonal trends, identify outliers, and visualize variable relationships.
-* **Data Preprocessing:** Cleans data and prepares it for modeling (e.g., using OneHotEncoder, LabelEncoder, StandardScaler, RobustScaler).
-* **Modeling:** Compares multiple regression models (Linear Regression and Random Forest Regressor) for yield prediction.
-* **Model Evaluation:** Includes RMSE and R² metrics with insights on model performance.
-* **Feature Importance:** Highlights key variables that influence crop yield.
-* **Seasonal Analysis:** Explores agricultural seasons (Kharif, Rabi, Zaid) and their impact on yield.
+- **Data Exploration:** Understand seasonal trends, identify outliers, and visualize variable relationships.
+- **Data Preprocessing:** Cleans data and prepares it for modeling (e.g., using OneHotEncoder, LabelEncoder, StandardScaler, RobustScaler).
+- **Modeling:** Compares multiple regression models (Linear Regression and Random Forest Regressor) for yield prediction.
+- **Model Evaluation:** Includes RMSE and R² metrics with insights on model performance.
+- **Feature Importance:** Highlights key variables that influence crop yield.
+- **Seasonal Analysis:** Explores agricultural seasons (Kharif, Rabi, Zaid) and their impact on yield.
 
 ---
 
@@ -93,10 +94,10 @@ pip install pandas numpy matplotlib seaborn scikit-learn
 
 This project aligns with:
 
-* **SDG 2: Zero Hunger** — Enhancing agricultural productivity through predictive analytics.
-* **SDG 12: Responsible Consumption and Production** — Optimizing resource use with data-driven insights.
-* **SDG 13: Climate Action** — Supporting climate-resilient agricultural practices.
-* **SDG 8: Decent Work and Economic Growth** — Creating opportunities for agritech innovation.
+- **SDG 2: Zero Hunger** — Enhancing agricultural productivity through predictive analytics.
+- **SDG 12: Responsible Consumption and Production** — Optimizing resource use with data-driven insights.
+- **SDG 13: Climate Action** — Supporting climate-resilient agricultural practices.
+- **SDG 8: Decent Work and Economic Growth** — Creating opportunities for agritech innovation.
 
 ---
 
@@ -116,11 +117,6 @@ For support or questions, please contact \[Your Name] at \[[your.email@example.c
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-
-
-
-
-
 # Team Collaboration Guide - Please Read Before Contributing!
 
 ## Hey Team! 👋
@@ -129,10 +125,10 @@ Welcome to our project! I've put together this guide to help everyone collaborat
 
 ## What You'll Need Before Starting
 
-* Git installed on your machine (if you don't have it, grab it from [git-scm.com](https://git-scm.com))
-* Access to our GitHub repository (let me know if you need an invite)
-* Basic Git knowledge (don't worry, I'll walk you through everything)
-* **Python and Jupyter Notebook** installed. You can install using:
+- Git installed on your machine (if you don't have it, grab it from [git-scm.com](https://git-scm.com))
+- Access to our GitHub repository (let me know if you need an invite)
+- Basic Git knowledge (don't worry, I'll walk you through everything)
+- **Python and Jupyter Notebook** installed. You can install using:
 
 ```bash
 pip install notebook
@@ -172,17 +168,17 @@ This will open a new browser tab showing the notebook dashboard.
 
 4. **Open the `.ipynb` file:**
 
-   * Click on the notebook file to open it in your browser.
-   * Make your changes carefully and test your cells.
+   - Click on the notebook file to open it in your browser.
+   - Make your changes carefully and test your cells.
 
 5. **Save your work:**
 
-   * Click `File > Save and Checkpoint`, or simply press `Ctrl + S`
+   - Click `File > Save and Checkpoint`, or simply press `Ctrl + S`
 
 6. **Close the notebook and stop the server:**
 
-   * Once done, close the notebook tab.
-   * Stop the Jupyter server by pressing `Ctrl + C` in your terminal.
+   - Once done, close the notebook tab.
+   - Stop the Jupyter server by pressing `Ctrl + C` in your terminal.
 
 7. **Stage and commit your changes:**
 
@@ -199,8 +195,8 @@ git push origin your-branch-name
 
 > ✅ **Avoid merge conflicts:**
 >
-> * Don’t edit the same notebook cell as someone else.
-> * Always pull from `main` before editing.
+> - Don’t edit the same notebook cell as someone else.
+> - Always pull from `main` before editing.
 
 ---
 
@@ -228,15 +224,15 @@ git checkout -b feature/your-awesome-feature
 
 **Branch naming tips:**
 
-* `feature/description`
-* `bugfix/what-you-fixed`
-* `hotfix/urgent-fix`
-* `docs/what-you-updated`
+- `feature/description`
+- `bugfix/what-you-fixed`
+- `hotfix/urgent-fix`
+- `docs/what-you-updated`
 
 ### Step 4: Do Your Magic! ✨
 
-* Edit your `.ipynb` file or Python code.
-* Run cells to test and make sure everything works.
+- Edit your `.ipynb` file or Python code.
+- Run cells to test and make sure everything works.
 
 ### Step 5: Save Your Work
 
@@ -254,8 +250,8 @@ git push origin feature/your-awesome-feature
 
 ### Step 7: Ask for a Code Review (Pull Request)
 
-* Use GitHub to open a Pull Request.
-* Fill in title, description, screenshots, and testing steps.
+- Use GitHub to open a Pull Request.
+- Fill in title, description, screenshots, and testing steps.
 
 ### Step 8: Work With Me on Reviews
 
@@ -280,18 +276,18 @@ git push origin --delete feature/your-awesome-feature
 
 ### ❌ DON'T:
 
-* Push directly to `main`
-* Use `--force` on shared branches
-* Commit secrets
-* Upload huge files without asking
+- Push directly to `main`
+- Use `--force` on shared branches
+- Commit secrets
+- Upload huge files without asking
 
 ### ✅ DO:
 
-* Work on branches
-* Pull main before edits
-* Write clear commits
-* Test code
-* Keep PRs focused
+- Work on branches
+- Pull main before edits
+- Write clear commits
+- Test code
+- Keep PRs focused
 
 ---
 
@@ -347,13 +343,12 @@ git push origin feature/new-thing
 
 ## Need Help? Just Ask!
 
-* Ping me directly
-* Create a GitHub issue
-* Ask in the group chat
+- Ping me directly
+- Create a GitHub issue
+- Ask in the group chat
 
 ## Final Thoughts
 
 Thanks for reading this! Let’s keep things clean, simple, and helpful. Follow the workflow, support each other, and let's build something awesome 🚀
 
 ---
-

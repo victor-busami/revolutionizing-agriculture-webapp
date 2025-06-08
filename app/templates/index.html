@@ -1,0 +1,180 @@
+{% extends "base.html" %} {% block title %}Agricultural Analytics Platform -
+Home{% endblock %} {% block content %}
+<div class="container">
+  <div class="row align-items-center py-5">
+    <div class="col-md-6">
+      <h1 class="display-4 fw-bold text-success">
+        Revolutionizing Agriculture with Data-Driven Insights
+      </h1>
+      <p class="lead mt-4">
+        Optimize your agricultural yields through advanced analytics and machine
+        learning predictions that help make informed decisions about resource
+        allocation.
+      </p>
+      <div class="mt-5">
+        <a
+          href="{{ url_for('dashboard') }}"
+          class="btn btn-success btn-lg me-3"
+        >
+          <i class="fas fa-chart-line me-2"></i>View Dashboard
+        </a>
+        <a
+          href="{{ url_for('predict') }}"
+          class="btn btn-outline-success btn-lg"
+        >
+          <i class="fas fa-seedling me-2"></i>Predict Yield
+        </a>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <img
+        src="{{ url_for('static', filename='img/agriculture_hero.png') }}"
+        alt="Agriculture Analytics"
+        class="img-fluid rounded shadow-lg"
+        style="max-height: 400px"
+      />
+    </div>
+  </div>
+
+  <div class="row mt-5 pt-5">
+    <div class="col-12 text-center mb-5">
+      <h2 class="display-5 fw-bold text-success">Key Features</h2>
+      <p class="lead">Comprehensive tools for agricultural data analysis</p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <div
+            class="feature-icon bg-success bg-opacity-10 p-3 rounded-circle mb-3 mx-auto"
+            style="width: 80px; height: 80px"
+          >
+            <i class="fas fa-chart-pie fa-2x text-success"></i>
+          </div>
+          <h3 class="card-title h5 fw-bold">Data Exploration</h3>
+          <p class="card-text">
+            Understand seasonal trends, identify outliers, and visualize
+            relationships between variables.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <div
+            class="feature-icon bg-success bg-opacity-10 p-3 rounded-circle mb-3 mx-auto"
+            style="width: 80px; height: 80px"
+          >
+            <i class="fas fa-robot fa-2x text-success"></i>
+          </div>
+          <h3 class="card-title h5 fw-bold">ML-Powered Predictions</h3>
+          <p class="card-text">
+            Use our Random Forest model to predict crop yields based on various
+            input factors.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <div
+            class="feature-icon bg-success bg-opacity-10 p-3 rounded-circle mb-3 mx-auto"
+            style="width: 80px; height: 80px"
+          >
+            <i class="fas fa-lightbulb fa-2x text-success"></i>
+          </div>
+          <h3 class="card-title h5 fw-bold">Actionable Insights</h3>
+          <p class="card-text">
+            Get recommendations for optimizing resource allocation and
+            maximizing yields.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 pt-5">
+    <div class="col-12 text-center mb-4">
+      <h2 class="display-5 fw-bold text-success">
+        Supporting Sustainable Development Goals
+      </h2>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <h3 class="card-title h5 fw-bold">SDG 2: Zero Hunger</h3>
+          <p class="card-text">
+            Enhancing agricultural productivity through predictive analytics.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-warning p-2">Zero Hunger</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <h3 class="card-title h5 fw-bold">SDG 12: Responsible Consumption</h3>
+          <p class="card-text">
+            Optimizing resource use with data-driven insights.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-info p-2">Responsible Consumption</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <h3 class="card-title h5 fw-bold">SDG 13: Climate Action</h3>
+          <p class="card-text">
+            Supporting climate-resilient agricultural practices.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-success p-2">Climate Action</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body text-center">
+          <h3 class="card-title h5 fw-bold">SDG 8: Economic Growth</h3>
+          <p class="card-text">
+            Creating opportunities for agritech innovation.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-primary p-2">Economic Growth</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 pt-4">
+    <div class="col-12 text-center">
+      <a
+        href="https://gamma.app/docs/Revolutionizing-Agriculture-with-Data-Driven-Insights-g0s8al76rdggogq"
+        class="btn btn-lg btn-outline-success"
+        target="_blank"
+      >
+        <i class="fas fa-external-link-alt me-2"></i>View Our Pitch Deck
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
