@@ -2,11 +2,13 @@
 
 ## Agriculture Analytics Platform
 
-A comprehensive machine learning-based analytics platform designed to predict agricultural yields and optimize resource usage. This project is implemented in the `agric_analysis_training.ipynb` Jupyter Notebook file, which includes end-to-end steps from data preprocessing to model evaluation.
+A comprehensive machine learning-based analytics platform designed to predict agricultural yields and optimize resourc## 📬 Contact Contributors
+
+For support or questions, please contact Victor Busami at [victorbusami1@gmail.com](mailto:victorbusami1@gmail.com).sage. This project is available both as a Jupyter Notebook for data analysis and as an interactive Flask web application.
 
 ## About
 
-Clink the link to get our pitch deck link:
+Click the link to get our pitch deck link:
 
 🔗 [gamma.app/docs/Revolutionizing-Agriculture-with-Data-Driven-Insights](https://gamma.app/docs/Revolutionizing-Agriculture-with-Data-Driven-Insights-g0s8al76rdggogq)
 
@@ -14,8 +16,9 @@ Clink the link to get our pitch deck link:
 
 ## 📂 Project Structure
 
-- `agric_analysis_training.ipynb`: The main notebook containing all analysis steps including:
+### Jupyter Notebook Analysis
 
+- `agric_analysis_training.ipynb`: The main notebook containing all analysis steps including:
   - Data Loading: Uses `agriculture_dataset.csv` (should be in the same directory) with crop yield, season, and input data.
   - Exploratory Data Analysis (EDA): Visualizations (histograms, boxplots, scatter plots) to understand variable distributions and detect outliers.
   - Data Preprocessing: Handles missing values, applies scaling, and encodes categorical variables.
@@ -23,7 +26,16 @@ Clink the link to get our pitch deck link:
   - Model Evaluation: Uses metrics such as RMSE and R² score to evaluate performance.
   - Insights: Summarizes findings including feature importance and seasonal impacts.
 
-- `agriculture_dataset.csv`: The dataset containing agricultural yield data (not included—please provide your own dataset).
+### Flask Web Application
+
+- `app.py`: Main Flask application file
+- `app/`: Directory containing web application components:
+
+  - `templates/`: HTML templates for the web interface
+  - `static/`: CSS, JavaScript, and image files
+  - `models/`: Trained machine learning models and metrics
+
+- `agriculture_dataset.csv`: The dataset containing agricultural yield data
 
 ---
 
@@ -32,35 +44,59 @@ Clink the link to get our pitch deck link:
 ### 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/agriculture-analytics-platform.git
-cd agriculture-analytics-platform
+git clone https://github.com/victor-busami/revolutionizing-agriculture-webapp.git
+cd revolutionizing-agriculture-webapp
 ```
 
 ### 🛠️ Install Dependencies
 
 The project requires Python 3.x and the following libraries:
 
+- flask
 - pandas
 - numpy
 - matplotlib
 - seaborn
 - scikit-learn
+- plotly
+- flask-wtf
+- joblib
+- gunicorn (for deployment)
 
 To install all dependencies:
 
 ```bash
+# Create and activate a virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-```
-
-If `requirements.txt` is not provided, you can install manually:
-
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn
 ```
 
 ---
 
-## 📊 How to Run the Notebook
+## 📊 How to Run the Project
+
+### Option 1: Run the Flask Web Application
+
+1. Make sure you have activated your virtual environment (if using one).
+
+2. Start the Flask application:
+
+   ```bash
+   python app.py
+   ```
+
+3. Open a web browser and navigate to: http://127.0.0.1:5000
+
+4. Explore the different features of the application:
+   - Browse the dataset on the Data page
+   - View visualizations and analytics on the Visualizations page
+   - Access the dashboard for key metrics and insights
+   - Use the prediction tool to estimate crop yields based on various parameters
+
+### Option 2: Run the Jupyter Notebook
 
 1. Launch Jupyter Notebook:
 
@@ -81,12 +117,22 @@ pip install pandas numpy matplotlib seaborn scikit-learn
 
 ## 🔍 Key Features and Functionality
 
+### Data Analysis Features
+
 - **Data Exploration:** Understand seasonal trends, identify outliers, and visualize variable relationships.
 - **Data Preprocessing:** Cleans data and prepares it for modeling (e.g., using OneHotEncoder, LabelEncoder, StandardScaler, RobustScaler).
 - **Modeling:** Compares multiple regression models (Linear Regression and Random Forest Regressor) for yield prediction.
 - **Model Evaluation:** Includes RMSE and R² metrics with insights on model performance.
 - **Feature Importance:** Highlights key variables that influence crop yield.
 - **Seasonal Analysis:** Explores agricultural seasons (Kharif, Rabi, Zaid) and their impact on yield.
+
+### Web Application Features
+
+- **Interactive Dashboard:** Key metrics and insights displayed in an easy-to-understand format
+- **Data Browser:** View and explore the agricultural dataset
+- **Visualization Tools:** Interactive charts and graphs to analyze agricultural patterns
+- **Yield Prediction:** Input your parameters to get crop yield predictions
+- **Responsive Design:** Access the application on desktop and mobile devices
 
 ---
 
@@ -107,9 +153,25 @@ We welcome contributions! Suggestions, bug reports, and pull requests are apprec
 
 ---
 
-## 📬 Contact Contributors
+## � Deployment
 
-For support or questions, please contact \[Your Name] at \[[your.email@example.com](mailto:your.email@example.com)].
+To deploy this application to a production server:
+
+1. Create a Procfile for platforms like Heroku:
+
+   ```
+   web: gunicorn app:app
+   ```
+
+2. Set appropriate environment variables for production.
+
+3. Deploy to your preferred hosting platform (Heroku, AWS, DigitalOcean, etc.)
+
+---
+
+## �📬 Contact Contributors
+
+For support or questions, please contact Victor Busami at [[victor.busami@example.com](mailto:victor.busami@example.com)].
 
 ---
 
