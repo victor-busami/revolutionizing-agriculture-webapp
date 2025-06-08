@@ -4,6 +4,12 @@
 
 A comprehensive machine learning-based analytics platform designed to predict agricultural yields and optimize resource usage. This project is implemented in the `agric_analysis_training.ipynb` Jupyter Notebook file, which includes end-to-end steps from data preprocessing to model evaluation.
 
+## About
+
+Clink the link to get our pitch deck link:
+
+🔗 [gamma.app/docs/Revolutionizing-Agriculture-with-Data-Driven-Insights](https://gamma.app/docs/Revolutionizing-Agriculture-with-Data-Driven-Insights-g0s8al76rdggogq)
+
 ---
 
 ## 📂 Project Structure
