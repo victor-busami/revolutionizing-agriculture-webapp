@@ -167,6 +167,24 @@ To deploy this application to a production server:
 
 3. Deploy to your preferred hosting platform (Heroku, AWS, DigitalOcean, etc.)
 
+### 🌐 Deployment
+
+#### Deploying to Render
+
+This application is configured for easy deployment on Render:
+
+1. Create a free account on [Render](https://render.com/)
+2. Connect your GitHub repository
+3. Create a new Web Service
+4. Use the following settings:
+   - Name: agricultural-analytics
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+   - Choose the free plan
+5. Click "Create Web Service"
+
+The application includes a `render.yaml` configuration file to simplify deployment.
+
 ---
 
 ## �📬 Contact Contributors
@@ -412,5 +430,3 @@ git push origin feature/new-thing
 ## Final Thoughts
 
 Thanks for reading this! Let’s keep things clean, simple, and helpful. Follow the workflow, support each other, and let's build something awesome 🚀
-
----
