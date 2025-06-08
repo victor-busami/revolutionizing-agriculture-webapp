@@ -336,3 +336,6 @@ if __name__ == '__main__':
     # Make sure model is trained before starting app
     get_model()
     app.run(debug=True)
+
+# For Vercel deployment
+get_model()  # Ensure model is loaded on cold start
